@@ -8,6 +8,7 @@ public class AccountsResponse {
     }
 
     public void setSimpleInterest(double simpleInterest) {
+
         this.simpleInterest = simpleInterest;
     }
 }
