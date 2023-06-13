@@ -16,26 +16,32 @@ public class AccountsRequestDTO {
     // Getters and setters
 
     public Double getPrincipal() {
+
         return principal;
     }
 
     public void setPrincipal(Double principal) {
+
         this.principal = principal;
     }
 
-    public Double getInterestRate() {
+    public Double getRate() {
+
         return interestRate;
     }
 
     public void setInterestRate(Double interestRate) {
+
         this.interestRate = interestRate;
     }
 
-    public Integer getTimePeriod() {
-        return timePeriod;
+    public Integer getTime() {
+        return
+                timePeriod;
     }
 
     public void setTimePeriod(Integer timePeriod) {
+
         this.timePeriod = timePeriod;
     }
 }

@@ -6,8 +6,6 @@ Explore modern software development practices and design patterns with this proj
 
 ```
 
-
-
 ## Project Structure
 ```text
 src/main/java
@@ -25,11 +23,22 @@ src/main/java
             │   ├── AccountsResponse.java
             │   ├── ArithmeticResponse.java
             │   ├── ScientificResponse.java
-            │   └── SimpleInterestResponse.java
+            ├── factory
+            │   ├── AccountsCalculatorFactory.java
+            │   ├── ArithmeticCalculatorFactory.java
+            │   └── ScientificCalculatorFactory.java
+            ├── facade
+            │   ├── AccountsCalculatorFacade.java
+            │   ├── ArithmeticCalculatorFacade.java
+            │   └── ScientificCalculatorFacade.java
             ├── service
-            │   └── CalculatorService.java
-            └── service
-                └── CalculatorServiceImpl.java
+            │   ├── AccountsCalculatorService.java
+            │   ├── ArithmeticCalculatorService.java
+            │   └── ScientificCalculatorService.java
+            └── serviceimpl
+                ├── AccountsCalculatorServiceImpl.java
+                ├── ArithmeticCalculatorServiceImpl.java
+                └── ScientificCalculatorServiceImpl.java
 pom.xml
 README.md
 
