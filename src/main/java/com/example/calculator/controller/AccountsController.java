@@ -1,9 +1,8 @@
 package com.example.calculator.controller;
 
 import com.example.calculator.dto.AccountsRequestDTO;
-import com.example.calculator.facade.AccountsCalculatorFacade;
 import com.example.calculator.model.AccountsResponse;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.example.calculator.service.AccountsService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -13,24 +12,27 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
 
-
 @RestController
 @RequestMapping("/api/calculator")
-public class AccountsCalculatorController {
-    @Autowired
-    private AccountsCalculatorFacade accountsCalculatorFacade;
+public class AccountsController {
+
+    private final AccountsService accountsService;
+    public AccountsController(AccountsService accountsService) {
+        this.accountsService = accountsService;
+    }
 
     @PostMapping("/accounts")
-    public ResponseEntity<AccountsResponse> calculateSimpleInterest(
+    public ResponseEntity<AccountsResponse> performAccountsOperation(
             @Valid @RequestBody AccountsRequestDTO requestDTO, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             // Handle validation errors
             return ResponseEntity.badRequest().build();
         }
-        double interest = accountsCalculatorFacade.calculateSimpleInterest(requestDTO);
+
+        double result = accountsService.performOperation(requestDTO);
         AccountsResponse response = new AccountsResponse();
-        response.setSimpleInterest(interest);
+        response.setResult(result);
         return ResponseEntity.ok(response);
+
     }
-    // Similarly, you can inject and use other facades like ArithmeticCalculatorFacade, ScientificCalculatorFacade, etc.
 }
