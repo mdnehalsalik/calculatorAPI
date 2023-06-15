@@ -1,14 +1,15 @@
 package com.example.calculator.model;
 
 public class AccountsResponse {
-    private double simpleInterest;
+    private double result;
 
-    public double getSimpleInterest() {
-        return simpleInterest;
+    public double getResult() {
+
+        return result;
     }
 
-    public void setSimpleInterest(double simpleInterest) {
+    public void setResult(double result) {
 
-        this.simpleInterest = simpleInterest;
+        this.result = result;
     }
 }
