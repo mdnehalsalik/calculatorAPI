@@ -1,50 +1,46 @@
 package com.example.calculator.dto;
+
+import com.example.calculator.utils.LoggerUtil;
+import org.slf4j.Logger;
+
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import java.util.List;
 
 public class ArithmeticRequestDTO {
 
-    @NotNull(message = "Operation is required")
+    @NotNull(message = "Operation cannot be null")
     private String operation;
 
-    @NotNull(message = "Value1 is required")
-    private Double value1;
+    @NotEmpty(message = "Values array cannot be empty")
+    private List<@NotNull(message = "Values array cannot contain null elements") Double> values;
 
-    @NotNull(message = "Value2 is required")
-    private Double value2;
-
-    // Getters and setters
+    private static final Logger logger = LoggerUtil.getLogger();
 
     public String getOperation() {
         return operation;
     }
 
     public void setOperation(String operation) {
+        if (operation == null) {
+            logger.error("Operation cannot be null");
+        }
         this.operation = operation;
     }
 
-    public Double getValue1() {
-        return value1;
+    public List<Double> getValues() {
+        return values;
     }
 
-    public void setValue1(Double value1) {
-        this.value1 = value1;
-    }
-
-    public Double getValue2() {
-        return value2;
-    }
-
-    public void setValue2(Double value2) {
-        this.value2 = value2;
+    public void setValues(List<Double> values) {
+        if (values == null || values.isEmpty()) {
+            logger.error("Values array cannot be empty");
+        }
+        for (Double value : values) {
+            if (value == null) {
+                logger.error("Values array cannot contain null elements");
+            }
+        }
+        this.values = values;
     }
 }
-
-
-
-
-
-
-
-
-
-
