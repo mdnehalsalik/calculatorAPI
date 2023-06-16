@@ -36,7 +36,7 @@ public class GeneralRequestValidator implements Validator {
             operationValidator.validate(arithmeticRequestDTO.getOperation(), validationErrors);
 
             // Validate values
-            valuesValidator.arithmeticValuesValidate(arithmeticRequestDTO.getValues(), validationErrors);
+            valuesValidator.arithmeticValuesValidate(arithmeticRequestDTO.getValues(), validationErrors, arithmeticRequestDTO.getOperation());
         }
 
         else if (requestDTO instanceof AccountsRequestDTO) {

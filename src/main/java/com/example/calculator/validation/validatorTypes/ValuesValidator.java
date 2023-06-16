@@ -8,7 +8,18 @@ import java.util.List;
 public class ValuesValidator {
     private static final String VALUES_FIELD = "values";
 
-    public void arithmeticValuesValidate(List<Double> values, List<String> validationErrors) {
+    public void arithmeticValuesValidate(List<Double> values, List<String> validationErrors, String operation) {
+        if (operation.equals("div")) {
+            if (values.size() != 2) {
+                validationErrors.add("[Values issue] For division operation, the values list must contain exactly 2 elements.");
+            } else {
+                double divisor = values.get(1);
+                if (divisor == 0) {
+                    validationErrors.add("[Values issue] Division by zero is not allowed.");
+                }
+            }
+        }
+
         for (Double value : values) {
             if (!isNumeric(value)) {
                 validationErrors.add("[Numeric issue] Values can only contain numbers");
@@ -33,3 +44,4 @@ public class ValuesValidator {
         return true; // All values are considered valid in this example
     }
 }
+
