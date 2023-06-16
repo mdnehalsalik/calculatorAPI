@@ -1,28 +1,44 @@
 package com.example.calculator.dto;
 
-import com.example.calculator.utils.LoggerUtil;
-import org.slf4j.Logger;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
+import javax.validation.Valid;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+import java.util.ArrayList;
 import java.util.List;
 
 public class ScientificRequestDTO {
 
+    @Valid
     @NotNull(message = "Expression inside a list is required")
+    @NotEmpty(message = "Expression list cannot be empty")
+    @Size(max = 1, message = "Expression list can only contain one element")
     private List<String> expression;
 
     @NotNull(message = "Operation cannot be null")
     private String operation;
 
-    private static final Logger logger = LoggerUtil.getLogger();
+    private List<String> errors; // Field to store validation errors
+    private List<Exception> exceptions; // Field to store exceptions
 
-    public @NotNull(message = "Expression inside a list is required") List<String> getExpression() {
+    @JsonCreator
+    public ScientificRequestDTO(
+            @JsonProperty("expression") List<String> expression,
+            @JsonProperty("operation") String operation) {
+        this.expression = expression;
+        this.operation = operation;
+        this.errors = new ArrayList<>();
+        this.exceptions = new ArrayList<>();
+    }
 
+    public List<String> getExpression() {
         return expression;
     }
 
-    public void setExpression(@NotNull(message = "Expression inside a list is required") List<String> expression) {
-
+    public void setExpression(List<String> expression) {
         this.expression = expression;
     }
 
@@ -31,12 +47,22 @@ public class ScientificRequestDTO {
     }
 
     public void setOperation(String operation) {
-        if (operation == null) {
-            logger.error("Operation cannot be null");
-        }
         this.operation = operation;
     }
+
+    public List<String> getErrors() {
+        return errors;
+    }
+
+    public void setErrors(List<String> errors) {
+        this.errors = errors;
+    }
+
+    public List<Exception> getExceptions() {
+        return exceptions;
+    }
+
+    public void setExceptions(List<Exception> exceptions) {
+        this.exceptions = exceptions;
+    }
 }
-
-
-

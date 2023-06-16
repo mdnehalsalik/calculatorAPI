@@ -1,13 +1,47 @@
 package com.example.calculator.model;
 
-public class ScientificResponse {
-    private double result;
+import com.fasterxml.jackson.annotation.JsonInclude;
 
-    public double getResult() {
+import java.util.List;
+
+public class ScientificResponse {
+    private Double result;
+
+    @JsonInclude(JsonInclude.Include.NON_NULL) // Include only if not null
+    private List<String> errors;
+
+    @JsonInclude(JsonInclude.Include.NON_NULL) // Include only if not null
+    private List<Exception> exceptions;
+
+    public Double getResult() {
         return result;
     }
 
-    public void setResult(double result) {
+    public void setResult(Double result) {
         this.result = result;
+    }
+
+    public List<String> getErrors() {
+        return errors;
+    }
+
+    public void setErrors(List<String> errors) {
+        this.errors = errors;
+    }
+
+    public List<Exception> getExceptions() {
+        return exceptions;
+    }
+
+    public void setExceptions(List<Exception> exceptions) {
+        this.exceptions = exceptions;
+    }
+
+    public boolean hasErrors() {
+        return errors != null && !errors.isEmpty();
+    }
+
+    public boolean hasExceptions() {
+        return exceptions != null && !exceptions.isEmpty();
     }
 }
