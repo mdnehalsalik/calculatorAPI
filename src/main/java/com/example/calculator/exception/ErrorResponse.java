@@ -3,37 +3,18 @@ package com.example.calculator.exception;
 import java.util.List;
 
 public class ErrorResponse {
-    private int statusCode;
-    private String message;
-    private List<String> errors;
+    private List<String> messages;
 
-    public ErrorResponse(String message, List<String> errors) {
-        this.statusCode = statusCode;
-        this.message = message;
-        this.errors = errors;
+    public ErrorResponse(List<String> messages) {
+        this.messages = messages;
     }
 
-    public int getStatusCode() {
-        return statusCode;
+    public List<String> getMessages() {
+        return messages;
     }
 
-    public void setStatusCode(int statusCode) {
-        this.statusCode = statusCode;
-    }
-
-    public String getMessage() {
-        return message;
-    }
-
-    public void setMessage(String message) {
-        this.message = message;
-    }
-
-    public List<String> getErrors() {
-        return errors;
-    }
-
-    public void setErrors(List<String> errors) {
-        this.errors = errors;
+    public void setMessages(List<String> messages) {
+        this.messages = messages;
     }
 }
+

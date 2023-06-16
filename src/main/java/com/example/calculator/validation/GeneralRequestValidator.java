@@ -1,7 +1,9 @@
 package com.example.calculator.validation;
 
 import com.example.calculator.dto.ArithmeticRequestDTO;
-import com.example.calculator.dto.ScientificRequestDTO;
+import com.example.calculator.exception.ValidationException;
+import com.example.calculator.validation.validatorTypes.OperationValidator;
+import com.example.calculator.validation.validatorTypes.ValuesValidator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
@@ -13,29 +15,31 @@ import java.util.List;
 public class GeneralRequestValidator implements Validator {
     private static final Logger LOGGER = LoggerFactory.getLogger(GeneralRequestValidator.class);
 
+    private final OperationValidator operationValidator;
+    private final ValuesValidator valuesValidator;
+
+    public GeneralRequestValidator(OperationValidator operationValidator, ValuesValidator valuesValidator) {
+        this.operationValidator = operationValidator;
+        this.valuesValidator = valuesValidator;
+    }
+
     @Override
     public void validate(Object requestDTO) {
-        List<Double> values = new ArrayList<>();
-        if(requestDTO instanceof ArithmeticRequestDTO) {
-            values = ((ArithmeticRequestDTO) requestDTO).getValues();
+
+        List<String> validationErrors = new ArrayList<>();
+
+        if (requestDTO instanceof ArithmeticRequestDTO) {
+            ArithmeticRequestDTO arithmeticRequestDTO = (ArithmeticRequestDTO) requestDTO;
+
+            // Validate operation
+            operationValidator.validate(arithmeticRequestDTO.getOperation(), validationErrors);
+
+            // Validate values
+            valuesValidator.validate(arithmeticRequestDTO.getValues(), validationErrors);
         }
-        else if(requestDTO instanceof ScientificRequestDTO) {
-            List<String> expression = ((ScientificRequestDTO) requestDTO).getExpression();
-            if (expression != null) {
-                for (char c : expression.get(0).toCharArray()) {
-                    if (Character.isDigit(c)) {
-                        values.add((double) Character.getNumericValue(c));
-                    }
-                }
-            }
-        }
-        // assuming values field is a List of Doubles in all DTOs
-        for (Double value : values) {
-            if (value.intValue() == value) {
-                continue;
-            }
-            LOGGER.error("values can only contain integers or floats");
-            throw new IllegalArgumentException("values can only contain integers or floats");
+
+        if (!validationErrors.isEmpty()) {
+            throw new ValidationException("Validation error", validationErrors);
         }
     }
 }

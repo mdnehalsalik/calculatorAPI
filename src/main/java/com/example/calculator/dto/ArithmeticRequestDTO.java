@@ -3,8 +3,11 @@ package com.example.calculator.dto;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import javax.validation.Valid;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+import java.util.ArrayList;
 import java.util.List;
 
 public class ArithmeticRequestDTO {
@@ -12,8 +15,13 @@ public class ArithmeticRequestDTO {
     @NotNull(message = "Operation cannot be null")
     private final String operation;
 
+    @Valid
     @NotEmpty(message = "Values array cannot be empty")
+    @Size(min = 1, message = "Values array must contain at least one element")
     private final List<@NotNull(message = "Values array cannot contain null elements") Double> values;
+
+    private List<String> errors; // Field to store validation errors
+    private List<Exception> exceptions; // Field to store exceptions
 
     @JsonCreator
     public ArithmeticRequestDTO(
@@ -21,6 +29,8 @@ public class ArithmeticRequestDTO {
             @JsonProperty("values") List<Double> values) {
         this.operation = operation;
         this.values = values;
+        this.errors = new ArrayList<>();
+        this.exceptions = new ArrayList<>();
     }
 
     public String getOperation() {
@@ -29,5 +39,21 @@ public class ArithmeticRequestDTO {
 
     public List<Double> getValues() {
         return values;
+    }
+
+    public List<String> getErrors() {
+        return errors;
+    }
+
+    public void setErrors(List<String> errors) {
+        this.errors = errors;
+    }
+
+    public List<Exception> getExceptions() {
+        return exceptions;
+    }
+
+    public void setExceptions(List<Exception> exceptions) {
+        this.exceptions = exceptions;
     }
 }
