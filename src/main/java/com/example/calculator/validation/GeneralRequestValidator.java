@@ -36,7 +36,7 @@ public class GeneralRequestValidator implements Validator {
             operationValidator.validate(arithmeticRequestDTO.getOperation(), validationErrors);
 
             // Validate values
-            valuesValidator.validate(arithmeticRequestDTO.getValues(), validationErrors);
+            valuesValidator.arithmeticValuesValidate(arithmeticRequestDTO.getValues(), validationErrors);
         }
 
         else if (requestDTO instanceof AccountsRequestDTO) {
@@ -46,7 +46,7 @@ public class GeneralRequestValidator implements Validator {
             operationValidator.validate(accountsRequestDTO.getOperation(), validationErrors);
 
             // Validate values
-            valuesValidator.validate(accountsRequestDTO.getPrincipal(), accountsRequestDTO.getRate(), accountsRequestDTO.getTime(), validationErrors);
+            valuesValidator.accountsValuesValidate(accountsRequestDTO.getPrincipal(), accountsRequestDTO.getRate(), accountsRequestDTO.getTime(), validationErrors);
         }
 
         if (!validationErrors.isEmpty()) {

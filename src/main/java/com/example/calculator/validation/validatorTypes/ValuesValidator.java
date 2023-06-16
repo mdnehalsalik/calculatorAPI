@@ -8,7 +8,7 @@ import java.util.List;
 public class ValuesValidator {
     private static final String VALUES_FIELD = "values";
 
-    public void validate(List<Double> values, List<String> validationErrors) {
+    public void arithmeticValuesValidate(List<Double> values, List<String> validationErrors) {
         for (Double value : values) {
             if (!isNumeric(value)) {
                 validationErrors.add("[Numeric issue] Values can only contain numbers");
@@ -17,7 +17,7 @@ public class ValuesValidator {
         }
     }
 
-    public void validate(Double principal, Double interestRate, Integer timePeriod, List<String> validationErrors) {
+    public void accountsValuesValidate(Double principal, Double interestRate, Integer timePeriod, List<String> validationErrors) {
         if (principal == null || principal <= 0) {
             validationErrors.add("[Principal issue] Principal must be a positive number");
         }
