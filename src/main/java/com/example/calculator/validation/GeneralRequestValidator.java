@@ -1,6 +1,7 @@
 package com.example.calculator.validation;
 
 import com.example.calculator.dto.ArithmeticRequestDTO;
+import com.example.calculator.dto.AccountsRequestDTO;
 import com.example.calculator.exception.ValidationException;
 import com.example.calculator.validation.validatorTypes.OperationValidator;
 import com.example.calculator.validation.validatorTypes.ValuesValidator;
@@ -36,6 +37,16 @@ public class GeneralRequestValidator implements Validator {
 
             // Validate values
             valuesValidator.validate(arithmeticRequestDTO.getValues(), validationErrors);
+        }
+
+        else if (requestDTO instanceof AccountsRequestDTO) {
+            AccountsRequestDTO accountsRequestDTO = (AccountsRequestDTO) requestDTO;
+
+            // Validate operation
+            operationValidator.validate(accountsRequestDTO.getOperation(), validationErrors);
+
+            // Validate values
+            valuesValidator.validate(accountsRequestDTO.getPrincipal(), accountsRequestDTO.getRate(), accountsRequestDTO.getTime(), validationErrors);
         }
 
         if (!validationErrors.isEmpty()) {

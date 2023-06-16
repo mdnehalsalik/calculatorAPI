@@ -34,26 +34,32 @@ public class ArithmeticRequestDTO {
     }
 
     public String getOperation() {
+
         return operation;
     }
 
     public List<Double> getValues() {
+
         return values;
     }
 
-    public List<String> getErrors() {
+    public List<String> getErrors() {   // Q - Why it says never used
+
         return errors;
     }
 
     public void setErrors(List<String> errors) {
+
         this.errors = errors;
     }
 
-    public List<Exception> getExceptions() {
+    public List<Exception> getExceptions() {  // Q - Why it says never used
+
         return exceptions;
     }
 
     public void setExceptions(List<Exception> exceptions) {
+
         this.exceptions = exceptions;
     }
 }

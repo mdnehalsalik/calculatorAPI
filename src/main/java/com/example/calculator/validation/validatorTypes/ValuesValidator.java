@@ -17,8 +17,19 @@ public class ValuesValidator {
         }
     }
 
+    public void validate(Double principal, Double interestRate, Integer timePeriod, List<String> validationErrors) {
+        if (principal == null || principal <= 0) {
+            validationErrors.add("[Principal issue] Principal must be a positive number");
+        }
+        if (interestRate == null || interestRate < 1 || interestRate > 100) {
+            validationErrors.add("[Interest Rate issue] Interest Rate must be between 1 and 100");
+        }
+        if (timePeriod == null || timePeriod <= 0) {
+            validationErrors.add("[Time issue] Time Period must be a positive number");
+        }
+    }
+
     private boolean isNumeric(double value) {
         return true; // All values are considered valid in this example
     }
 }
-

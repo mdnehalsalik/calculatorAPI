@@ -31,7 +31,7 @@ public class ArithmeticController {
     }
 
     @PostMapping("/arithmetic")
-    public ResponseEntity<Object> performArithmeticOperation(
+    public ResponseEntity<Object> performArithmeticOperation(    // Q - Why it says never used - # Reaffirm Understanding - Binding errors only look for the validating conditions in the dto
             @Valid @RequestBody ArithmeticRequestDTO requestDTO, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             List<String> errors = new ArrayList<>();
