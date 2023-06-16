@@ -43,9 +43,12 @@ public class ArithmeticController {
 
         try {
             double result = arithmeticService.performOperation(requestDTO);
+
             ArithmeticResponse response = new ArithmeticResponse();
             response.setResult(result);
+
             return ResponseEntity.ok(response);
+
         } catch (ValidationException ex) {
             return ResponseEntity.badRequest().body(new ErrorResponse(ex.getValidationErrors()));
         } catch (HttpMessageNotReadableException ex) {
