@@ -3,6 +3,8 @@ package com.example.calculator.validation.validatorTypes;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 @Component
 public class ValuesValidator {
@@ -40,8 +42,45 @@ public class ValuesValidator {
         }
     }
 
+    public void scientificExpressionValidate(List<String> expression, List<String> validationErrors) {
+        if (expression == null || expression.isEmpty()) {
+            validationErrors.add("[Expression issue] Expression list cannot be null or empty");
+            return;
+        }
+
+        if (expression.size() != 1) {
+            validationErrors.add("[Expression issue] Expression list must contain exactly one element");
+            return;
+        }
+
+        String exp = expression.get(0);
+
+        // Validate the expression
+        Pattern pattern = Pattern.compile("[0-9.()+\\-*/\\s]+");
+        Matcher matcher = pattern.matcher(exp);
+
+        if (!matcher.matches()) {
+            validationErrors.add("[Expression issue] Invalid characters in the expression");
+            return;
+        }
+
+        int openBracketCount = 0;
+        int closeBracketCount = 0;
+
+        for (char c : exp.toCharArray()) {
+            if (c == '(') {
+                openBracketCount++;
+            } else if (c == ')') {
+                closeBracketCount++;
+            }
+        }
+
+        if (openBracketCount != closeBracketCount) {
+            validationErrors.add("[Expression issue] Unbalanced brackets in the expression");
+        }
+    }
+
     private boolean isNumeric(double value) {
         return true; // All values are considered valid in this example
     }
 }
-
