@@ -1,25 +1,16 @@
 ## Definition
 ```text
-The advanced Calculator API PROJECT is a comprehensive calculator application built with Maven, Spring Boot, and design patterns.
+The Calculator API PROJECT is a comprehensive calculator application built with Maven, Spring Boot, and design patterns.
 It offers a user-friendly interface, RESTful API, and backend persistence, enabling extensibility and scalability. 
 Explore modern software development practices and design patterns with this project.
-
+```
+## Design Patterns
+```text
 The calculator project incorporates several design patterns to enhance its structure and functionality.
 It utilizes the Factory pattern to create different calculators, the Facade pattern to provide a simplified
-interface for client code, the Data Transfer Object (DTO) pattern for efficient data transfer,
-the Singleton pattern for managing Spring components, the Template Method pattern for reusable controller methods,
-and potentially the Builder pattern for future enhancements. 
+interface for client code, the Data Transfer Object (DTO) pattern for efficient data transfer, the Singleton pattern for managing Spring components,
+the Template Method pattern for reusable controller methods, and potentially the Builder pattern for future enhancements. 
 These design patterns contribute to the project's modularity, extensibility, and maintainability.
-```
-```text
-# Calculator Application
-
-The Calculator Application is a simple calculator that provides arithmetic, accounts, and scientific calculations.
-
-## Directory Structure
-
-The directory structure of the calculator application is as follows:
-
 ```
 
 ## Project Structure
