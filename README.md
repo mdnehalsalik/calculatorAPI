@@ -7,9 +7,12 @@ Explore modern software development practices and design patterns with this proj
 ## Design Patterns
 ```text
 The calculator project incorporates several design patterns to enhance its structure and functionality.
-It utilizes the Factory pattern to create different calculators, the Facade pattern to provide a simplified
-interface for client code, the Data Transfer Object (DTO) pattern for efficient data transfer, the Singleton pattern for managing Spring components,
-the Template Method pattern for reusable controller methods, and potentially the Builder pattern for future enhancements. 
+It utilizes the Factory pattern to create different calculator objects,
+the Facade pattern to provide a simplifiedinterface for client code, 
+the Data Transfer Object (DTO) pattern for efficient data transfer, 
+the Singleton pattern for managing Spring components,
+the Template Method pattern for reusable controller methods, 
+and potentially the Builder pattern for future enhancements. 
 These design patterns contribute to the project's modularity, extensibility, and maintainability.
 ```
 
