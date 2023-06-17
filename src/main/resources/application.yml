@@ -1,0 +1,4 @@
+arithmetic:
+  operations: add,sub,mul,div
+accounts:
+  operations: simple,compound
